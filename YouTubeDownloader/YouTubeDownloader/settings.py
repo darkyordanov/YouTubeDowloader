@@ -108,3 +108,5 @@ AUTH_USER_MODEL = 'account.AccountUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
+DATA_UPLOAD_MAX_NUMBER_FILES = 10000  # Increase or set to -1 for no limit

@@ -1,12 +1,14 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Y2meta - Best YouTube to MP4 Converter</title>
+    <link rel="icon" type="image/jpeg" sizes="32x32" href="{% static 'media/logos/social-media-still-life-with-logo.jpg' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -83,15 +85,45 @@
         .feature p {
             color: #666;
         }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+        .search-btn {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Ensure the button behaves like an inline element */
+        }
+        
+        .search-btn:hover {
+            background-color: #cc0000;
+        }
+        
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="logo-container">
+        </div>
         <h1>Best YouTube To MP4 Converter</h1>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Paste YouTube link here...">
-            <button class="search-btn"><i class="fa-solid fa-download"></i> Download</button>
+            <form method="post" action="{% url 'download' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="save_location" class="save-location" directory webkitdirectory mozdirectory msdirectory odirectory required>
+                <input type="text" class="search-input" name="video_url" placeholder="Paste YouTube link here..." required>
+                <button type="submit" class="search-btn"><i class="fa-solid fa-download"></i> Download</button>
+            </form>
         </div>
+        
         <p>Convert and download YouTube to MP4 Free</p>
         <div class="instruction">
             <h2>How to Convert YouTube videos to MP4?</h2>
