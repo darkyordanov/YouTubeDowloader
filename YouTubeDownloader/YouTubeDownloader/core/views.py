@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic as view
 from django.urls import reverse_lazy
 
+from pytube import *
 from pytube import YouTube
 import os
 
@@ -10,6 +11,26 @@ from YouTubeDownloader.core.forms import VideoDownloadForm
 
 # def home(request):
 #     return render(request, 'core/home.html')
+
+def youtube(request): 
+  
+    # checking whether request.method is post or not 
+    if request.method == 'POST': 
+        
+        # getting link from frontend 
+        link = request.POST['link'] 
+        video = YouTube(link) 
+  
+        # setting video resolution 
+        stream = video.streams.get_lowest_resolution() 
+          
+        # downloads video 
+        stream.download() 
+  
+        # returning HTML page 
+        return render(request, 'core/download.html') 
+    
+    return render(request, 'core/download.html')
 
 
 class DownloadVideoView(view.FormView):

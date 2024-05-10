@@ -116,12 +116,19 @@
         </div>
         <h1>Best YouTube To MP4 Converter</h1>
         <div class="search-container">
-            <form method="post" action="{% url 'download' %}" enctype="multipart/form-data">
+            {% comment %} <form method="post" action="{% url 'youtube' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="file" name="save_location" class="save-location" directory webkitdirectory mozdirectory msdirectory odirectory required>
                 <input type="text" class="search-input" name="video_url" placeholder="Paste YouTube link here..." required>
                 <button type="submit" class="search-btn"><i class="fa-solid fa-download"></i> Download</button>
-            </form>
+            </form> {% endcomment %}
+            <form action="{% url 'youtube' %}" method="post"> 
+                {% csrf_token %} 
+                
+                <label for="link">Enter URL:</label> 
+                <input type="text" id="link" name="link"><br><br> 
+                <input type="submit" value="Submit"> 
+              </form> 
         </div>
         
         <p>Convert and download YouTube to MP4 Free</p>
